@@ -5,7 +5,7 @@ package gmachine
 // allocated to a new G-machine by default.
 const DefaultMemSize = 1024
 
-// MachineStruct is a struct type defined wich represents P register and memory allocation
+// MachineStruct is a struct type defined wich represents Program Counter (P) and Memory allocation slots
 type MachineStruct struct {
 	P      uint64
 	Memory []uint64
@@ -18,4 +18,9 @@ func New() *MachineStruct {
 		memSlice[i] = uint64(0)
 	}
 	return &MachineStruct{0, memSlice}
+}
+
+// Run must return 1
+func Run() *MachineStruct {
+	return &MachineStruct{New().P + 1, New().Memory}
 }
