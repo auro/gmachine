@@ -28,7 +28,19 @@ func TestHALT(t *testing.T) {
 	t.Parallel()
 	var want uint64 = 1
 	r := gmachine.New()
-	r = gmachine.Run()
+	r.Memory[0] = gmachine.OpHALT
+	gmachine.Run()
+	if r.P != want {
+		t.Errorf("want P==%d, got %d", want, r.P)
+	}
+}
+
+func TestNOOP(t *testing.T) {
+	t.Parallel()
+	var want uint64 = 0
+	r := gmachine.New()
+	r.Memory[0] = gmachine.OpNOOP
+	gmachine.Run()
 	if r.P != want {
 		t.Errorf("want P==%d, got %d", want, r.P)
 	}
